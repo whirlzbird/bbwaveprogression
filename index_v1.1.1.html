@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBWP</title>
+    <style>
+        body {
+            /* background-color: rgba(10, 10, 10, 1); */
+            background-image: linear-gradient(to right, rgba(25, 100, 225, 1), rgba(125, 25, 225, 1));
+            background-attachment: fixed;
+            margin: 0;
+            font-family: monospace;
+        }
+        .menu {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100px;
+            background-color: rgba(20, 20, 20, 1);
+            box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.75);
+        }
+        .classes {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            width: calc(50% - 40px);
+            height: calc(100% - 140px);
+            background-color: rgba(20, 20, 20, 1);
+            border-radius: 10px;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.75);
+            overflow-y: scroll;
+        }
+        .classcontent {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            width: calc(50% - 40px);
+            height: calc(100% - 140px);
+            background-color: rgba(20, 20, 20, 1);
+            border-radius: 10px;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.75);
+            overflow-y: scroll;
+        }
+
+        .class {
+            position: relative;
+            display: grid;
+            top: 10px;
+            margin-top: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: 50px;
+            background-color: rgba(25, 25, 25, 0.75);
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .classcontentItem {
+            position: relative;
+            top: 5px;
+            margin-top: 5px;
+            left: 10px;
+            width: calc(100% - 30px);
+            height: 20px;
+            background-color: rgba(25, 25, 25, 0.75);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+        }
+        .copied {
+            position: fixed;
+            display: grid;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 30px;
+            background-color: rgba(5, 5, 5, 0.5);
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            align-items: center;
+            padding: 5px;
+
+            -webkit-mask-image: linear-gradient(
+                to right,
+                transparent,
+                black 30%,
+                black 80%,
+                transparent
+            );
+            mask-image: linear-gradient(
+                to right,
+                transparent,
+                black 30%,
+                black 80%,
+                transparent
+            );
+        }
+
+        .menuBtn {
+            position: absolute;
+            top: 50%;
+            width: 200px;
+            height: 50px;
+            transform: translate(-50%, -50%);
+            background-color: rgba(30, 30, 30, 1);
+            border: none;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+            font-size: 25px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: rgba(20, 20, 20, 0);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background-color: rgba(30, 30, 30, 1);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu" id="menuID">
+        <button class="menuBtn" style="left: 25%;" id="ldboardBtnID">Leaderboard</button>
+        <button class="menuBtn" style="left: 50%;" id="discordBtnID">Discord</button>
+        <button class="menuBtn" style="left: 75%;" id="infoBtnID">Info</button>
+    </div>
+    <div class="classes" id="classesID"></div>
+    <div class="classcontent" id="classcontentID"></div>
+
+    <div class="copied" id="copiedID">ID Copied To Clipboard</div>
+
+<script>
+    const classes = document.getElementById('classesID');
+
+    const copiedDiv = document.getElementById('copiedID');
+    copiedDiv.style.display = 'none';
+    
+    const ldboardBtn = document.getElementById('ldboardBtnID');
+    const discordBtn = document.getElementById('discordBtnID');
+    const infoBtn = document.getElementById('infoBtnID');
+
+    ldboardBtn.addEventListener('mousedown', () => {
+        alert ('Coming soon');
+    });
+    discordBtn.addEventListener('mousedown', () => {
+        window.location.href = 'https://discord.gg/b98kMWacxc';
+    });
+    infoBtn.addEventListener('mousedown', () => {
+        alert ('Coming soon');
+    });
+
+    let rankList = {
+        'Bronze': 'darkorange',
+        'Silver': 'darkgray', 
+        'Gold': 'darkgoldenrod', 
+        'Emerald': 'green', 
+        'Ruby': 'red',
+        'Diamond': 'darkturquoise',
+        'Amethyst': 'magenta'
+    }
+    let lvlsList = {
+        'bronze': {
+            'Talisman': '2750918', 
+            'VSA': '224363',
+            'Wav chleg': '2260956', 
+        },
+        'silver': {
+            'Sorrow wave': '690798',
+            'Wave Challenge': '1495606', 
+            'Happy chamber': '2353960', 
+            'Heliopolis wave test': '2464597',
+            'Stop the hallucination b': '761727',
+        },
+        'gold': {
+            'Destiny': '622739', 
+            'Apricot special challenge': '135700',
+            'Crystal edge wave': '500018',
+            'Lucasade never clear': '1844920',
+        },
+        'emerald': {
+            'Galaxy collapse noctafly': '516756',
+        },
+        'Ruby': {
+            'Party house v2 39 - 52': '2773512',
+        },
+        'diamond': {
+            'Bacons warmup': '2741836', 
+            'Totem': '884607',
+            'The porkler': '480100',
+        },
+        'amethyst': {
+            'Fish and chips': '860367',
+        }
+    }
+
+    function classGen() {
+        for (let rank in rankList) {
+            const newClass = document.createElement('div');
+            newClass.classList.add('class');
+            newClass.id = rank + 'ID';
+            newClass.innerText = rank;
+            newClass.style.color = rankList[rank];
+            document.getElementById('classesID').appendChild(newClass);
+
+            newClass.addEventListener('mousedown', () => { 
+                contentGen(rank);
+            });
+        }
+    }
+    function contentGen(rank) {
+        const content = document.getElementById('classcontentID');
+        content.innerHTML = "";
+
+        let key = rank.toLowerCase();
+        let list = lvlsList[key];
+
+        if (!list || Object.keys(list).length === 0) {
+            content.innerHTML = "<div class='classcontentItem'>No levels added yet</div>";
+            return;
+        }
+
+        for (let name in list) {
+            const newContentItem = document.createElement('div');
+            newContentItem.classList.add('classcontentItem');
+            newContentItem.id = list[name] + 'ID';
+            newContentItem.innerText = name;
+
+            newContentItem.addEventListener('mousedown', () => { 
+                copied(name, list);
+            });
+
+            content.appendChild(newContentItem);
+        }
+    }
+
+    function copied(name, list) {
+        navigator.clipboard.writeText(list[name]);
+        copiedDiv.style.display = 'grid';
+
+        setTimeout(() => {
+            copiedDiv.style.display = 'none';
+        }, 2000);
+    }
+
+    classGen();
+</script>
+</body>
+</html>
